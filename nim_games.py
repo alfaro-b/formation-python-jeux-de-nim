@@ -4,6 +4,10 @@ max_matches_to_remove = 4
 
 
 def ask_players_name():
+    """
+    Demande le nom des joueurs.
+    :return: Liste des joueurs.
+    """
     players = [
         input("Saisissez le nom du joueur A :  "),
         input("Saisissez le nom du joueur B :  ")
@@ -11,26 +15,39 @@ def ask_players_name():
     return players
 
 
-def ask_who_start(players):
-    choice = int(input(f"Qui commence? 1-{players[0]} ou 2-{players[1]}: "))
+def ask_who_start(players_list):
+    """
+    Demande de choisir quel joueur commence la partie.
+    :param players_list: Liste des joueurs.
+    :return: Chiffre qui sera l'index du joueur dans la liste des joueurs.
+    """
+    choice = int(input(f"Qui commence? 1-{players_list[0]} ou 2-{players_list[1]}: "))
     return choice - 1
 
 
 def ask_nbr_matches():
+    """
+    Demande le nombre d'allumettes à retirer.
+    :return: Le nombre d'allumettes.
+    """
     while True:
         taken_matches = int(input(f"Combien d'allumettes souhaitez-vous retirer? "
                                   f"(Saisir un chiffre entre {min_matches_to_remove} et {max_matches_to_remove}).) "))
         if taken_matches > max_matches_to_remove:
-            print("Vous pouvez retirez 4 allumettes au maximum.")
+            print("Vous pouvez retirer 4 allumettes au maximum.")
             continue
         elif taken_matches < min_matches_to_remove:
-            print("Vous devez retirez 1 allumette au minimum.")
+            print("Vous devez retirer 1 allumette au minimum.")
             continue
 
         return taken_matches
 
 
 def play_game():
+    """
+    Partie : Tant qu'il reste une ou des allumettes, demande à tour de role de jouer.
+    :return: None
+    """
     stock_matches = initial_matches
     current_player_index = starting_player_index
 
