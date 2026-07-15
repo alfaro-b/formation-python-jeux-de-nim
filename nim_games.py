@@ -8,11 +8,10 @@ def ask_players_name():
     Demande le nom des joueurs.
     :return: Liste des joueurs.
     """
-    players = [
+    return [
         input("Saisissez le nom du joueur A :  "),
         input("Saisissez le nom du joueur B :  ")
     ]
-    return players
 
 
 def ask_who_start(players_list):
@@ -43,23 +42,27 @@ def ask_nbr_matches():
         return taken_matches
 
 
-def play_game():
+def play_game(players_list, first_player_index):
     """
     Partie : Tant qu'il reste une ou des allumettes, demande à tour de role de jouer.
     :return: None
     """
     stock_matches = initial_matches
-    current_player_index = starting_player_index
+    current_player_index = first_player_index
 
     while stock_matches > 0:
-        current_player = players[current_player_index]
+        current_player = players_list[current_player_index]
         print(f"C'est au tour de {current_player}")
 
         taken_matches = ask_nbr_matches()
         stock_matches -= taken_matches
+
+        if stock_matches == 0:
+            print(f"{current_player} a perdu, il a pris la dernière allumette!")
+            return
+
         current_player_index = 1 - current_player_index
         print(f"Il reste  {stock_matches} allumettes.")
-    print(f"{current_player} a perdu, il a pris la dernière allumette!")
 
 
 if __name__ == "__main__":
@@ -67,4 +70,4 @@ if __name__ == "__main__":
     starting_player_index = ask_who_start(players)
 
     print(f"{players[starting_player_index]} est le premier à jouer!")
-    play_game()
+    play_game(players, starting_player_index)
