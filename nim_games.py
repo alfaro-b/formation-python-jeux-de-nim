@@ -30,8 +30,10 @@ def ask_nbr_matches():
     :return: Le nombre d'allumettes.
     """
     while True:
-        taken_matches = int(input(f"Combien d'allumettes souhaitez-vous retirer? "
-                                  f"(Saisir un chiffre entre {min_matches_to_remove} et {max_matches_to_remove}).) "))
+        taken_matches = int(input(
+            f"Combien d'allumettes souhaitez-vous retirer? "
+            f"(Saisir un chiffre entre {min_matches_to_remove} et {max_matches_to_remove}).) ")
+        )
         if taken_matches > max_matches_to_remove:
             print("Vous pouvez retirer 4 allumettes au maximum.")
             continue
